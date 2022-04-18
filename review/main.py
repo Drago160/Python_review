@@ -1,24 +1,23 @@
 import pygame as pg
 import random
-import Fabricks as F
-import Cupcakes as C
-from Objects import Label
+import src.Fabricks as F
+import src.Toolfunc as C
+import src.Globals as G
+from src.Objects import Label
 import sys
 import math
-import event as E
+import src.event as E
 import time
-from PIL import Image
-from Tools import output
+from src.Tools import output
+import src.Objects
+
 
 WIDTH = 1900 
 HEIGHT = 1080 
 FPS = 30
 
-
 # Обрабатывая изображение на BG
 image_path = "img/bg.jpg"
-img = Image.open(image_path)
-img = img.resize((WIDTH, HEIGHT))
 bg = pg.image.load("img/bg.jpg")
 
 
@@ -33,7 +32,6 @@ pg.display.set_caption("CupCakeClicker")
 
 # Инициализируем кликер основной 
 Clicker = F.Fabrick(screen, 1)
-C.CakeScore += 15
 Clicker.active = True
 Clicker.body.active = True
 
@@ -49,17 +47,17 @@ Fabricks[1].pre_activate()
 
 
 
-#################FONTS#############
 Score = Label("", 280, int(screen.get_width()/2), int(screen.get_height()/2) - 20, (255, 15, 192), screen)
-###################################
 
 
 def Upgrade(Fabrics, N):
+    """Принимает список фабрик и уровень фабрики для улучшения
+    Вызывает улучшение соответствующей фабрики если это возможно"""
     if Fabricks[N-1]:
         Fabricks[N-1].upgrade()
     else:
-        if C.cost(N) <= C.CakeScore and Fabricks[N-2]:
-            C.CakeScore -= C.cost(N)
+        if C.cost(N) <= G.CakeScore and Fabricks[N-2]:
+            G.CakeScore -= C.cost(N)
             Fabricks[N-1].active = True 
             if (N < 11):
                 if not Fabricks[N]:
@@ -89,7 +87,7 @@ while run:
         #события клавиатуры
         if event.type == pg.KEYDOWN:
             if pg.key.get_pressed()[pg.K_z]:
-                C.CakeScore *= 100
+                G.CakeScore *= 100
             elif pg.key.get_pressed()[pg.K_SPACE]:
                 Clicker.update()
             elif pg.key.get_pressed()[pg.K_KP1]:
@@ -133,7 +131,7 @@ while run:
     #пишем сколько же там очков
 
     #text = f.render(output(C.CakeScore), True, (255, 15, 192))
-    Score.rewrite(output(C.CakeScore))
+    Score.rewrite(output(G.CakeScore))
     Score.draw()
     #screen.blit(text, (int(1.05*(WIDTH/2)), int(0.9*(HEIGHT/2))))
     pg.display.update()
