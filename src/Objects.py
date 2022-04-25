@@ -1,10 +1,9 @@
 """Реализация моделек"""
-
-import pygame as pg
-import src.Globals as G
 import src.Toolfunc as C
+import src.Globals as G
 import math
 from src.Tools import output
+import pygame as pg
 import time
 
 class Label():

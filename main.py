@@ -1,15 +1,18 @@
-import pygame as pg
-import random
-import src.Fabricks as F
 import src.Toolfunc as C
+import src.event as E
+import src.Fabricks as F
 import src.Globals as G
 from src.Objects import Label
-import sys
 import math
-import src.event as E
-import time
-from src.Tools import output
 import src.Objects
+from src.Tools import output
+import pygame as pg
+import random
+import sys
+import time
+
+
+
 
 
 WIDTH = 1900 
@@ -127,13 +130,9 @@ while run:
     for fab in Fabricks:
         fab.body.draw()
 
-
-    #пишем сколько же там очков
-
-    #text = f.render(output(C.CakeScore), True, (255, 15, 192))
+    #рисуем все
     Score.rewrite(output(G.CakeScore))
     Score.draw()
-    #screen.blit(text, (int(1.05*(WIDTH/2)), int(0.9*(HEIGHT/2))))
     pg.display.update()
     pg.display.flip()
 

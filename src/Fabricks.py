@@ -1,11 +1,9 @@
 """Модуль содержит класс Fabrick"""
-
-
 import src.Toolfunc as C  
-import pygame as pg
-import src.Objects as Obj
 import src.Globals as G
 import math
+import src.Objects as Obj
+import pygame as pg
 
 
 class Fabrick(pg.sprite.Sprite):
