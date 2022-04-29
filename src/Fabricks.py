@@ -1,5 +1,5 @@
 """Модуль содержит класс Fabrick"""
-import src.Toolfunc as C  
+import src.Toolfunc
 import src.Globals as G
 import math
 import src.Objects as Obj
@@ -11,14 +11,16 @@ class Fabrick(pg.sprite.Sprite):
 
     def __init__(self, screen, lvl):
         """конструктор принимает экран для отрисовки и уровень фабрики которую создать надо(уровни идут сверху вниз на экране от кликера к нижнему"""
-        self.body = Obj.Field(screen, 0, C.field_h(lvl), C.name(lvl), C.img(lvl),C.growth_rate(lvl), lvl)
+        self.body = Obj.Field(screen, lvl)
         self.lvl = lvl 
         self.rate = 1
-        self._cost = C.cost(self.lvl)
-        self.power = C.growth_rate(self.lvl)
-        self.accelerate = C.accelerate(self.lvl)
+        self._cost = src.Toolfunc.cost(self.lvl)
+        self.power = src.Toolfunc.growth_rate(self.lvl)
+        self.accelerate = src.Toolfunc.accelerate(self.lvl)
         self.cost *= G.Multiplier
         self._active = False
+
+        self.body.set_power(self.power);    
 
         
     def update(self):
