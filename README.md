@@ -2,7 +2,7 @@
 Выполните команды:  
 git clone git@github.com:Drago160/Python_review.git  
 cd Python_review  
-git chekcout dev  
+git checkout dev  
 python3 main.py  
 
 
