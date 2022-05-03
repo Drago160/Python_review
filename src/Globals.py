@@ -1,5 +1,5 @@
 """Модуль содержит константы"""
-CakeScore = 0
+cake_score = 0
 
 Multiplier = 1.1
 
@@ -8,6 +8,18 @@ IMG_SIZE = 80
 MARGIN = 10
 
 M_TOP = 40
+
+WIDTH = 1920
+HEIGHT = 1080
+FPS = 30
+
+#MAIN
+MAIN_LABEL_FONT_SIZE = 280
+MAIN_LABEL_COLOR = (255, 15, 192)
+MAIN_LABEL_MARGIN_TOP = 10
+####
+
+
 
 FIELD_HEIGHT = IMG_SIZE
 
@@ -19,6 +31,7 @@ IMAGES = ["cursor.jpg", "grandma.jpg", "bake.jpg", "bakehouse.png", "CakeMachine
 
 NAMES = ["Cursor", "Grandma", "Bake", "Bakehouse", "CakeMachine", "Factory", "AlchLab","TimeMachine", "Portal", "AntiCondencer", "Prism"]
 
+NUM_OF_FABRICKS = 11
 
 
 #FIELD CONST

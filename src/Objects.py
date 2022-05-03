@@ -26,10 +26,10 @@ class FabrickUpcost(Label):
     def __init__(self, bg):
         """Конструктор принимает bg для отрисовки стоимости"""
         super().__init__(
-                "", 
-                G.UPCOST_FONT_SIZE, 
-                G.IMG_SIZE + G.UPCOST_MARGIN_LEFT, 
-                G.FIELD_HEIGHT - G.UPCOST_MARGIN_BOT, 
+                "",
+                G.UPCOST_FONT_SIZE,
+                G.IMG_SIZE + G.UPCOST_MARGIN_LEFT,
+                G.FIELD_HEIGHT - G.UPCOST_MARGIN_BOT,
                 G.UPCOST_COLOR,
                 bg
                 )
@@ -38,12 +38,15 @@ class FabrickUpcost(Label):
 class FabrickBuycost(Label):
     """Класс стоимость покупки данной Фабрики"""
     def __init__(self, lvl, bg):
-        """Конструктор принимает уровень соответствующей фабрики и bg для отрисовки"""
+        """
+        Конструктор принимает уровень соответствующей фабрики
+        и bg для отрисовки
+        """
         super().__init__(
-                G.BUYCOST_LABEL + output(src.Toolfunc.cost(lvl)), 
-                G.BUYCOST_FONT_SIZE, 
-                G.IMG_SIZE + G.BUYCOST_MARGIN_LEFT, 
-                G.FIELD_HEIGHT - G.BUYCOST_MARGIN_BOT, 
+                G.BUYCOST_LABEL + output(src.Toolfunc.cost(lvl)),
+                G.BUYCOST_FONT_SIZE,
+                G.IMG_SIZE + G.BUYCOST_MARGIN_LEFT,
+                G.FIELD_HEIGHT - G.BUYCOST_MARGIN_BOT,
                 G.BUYCOST_COLOR,
                 bg
                 )
@@ -54,10 +57,10 @@ class FabrickRate(Label):
     def __init__(self, bg):
         """Конструктор принимает bg для отрисовки"""
         super().__init__(
-                str(1), 
-                G.RATE_FONT_SIZE, 
-                G.FIELD_WIDTH - G.RATE_MARGIN_RIGHT, 
-                int(G.FIELD_HEIGHT/2 - G.RATE_STANDART_MARGIN), 
+                str(1),
+                G.RATE_FONT_SIZE,
+                G.FIELD_WIDTH - G.RATE_MARGIN_RIGHT,
+                int(G.FIELD_HEIGHT/2 - G.RATE_STANDART_MARGIN),
                 G.RATE_COLOR,
                 bg
                 )
@@ -68,52 +71,55 @@ class FabrickPower(Label):
     def __init__(self, bg):
         """Конструктор принимает bg для отрисовки"""
         super().__init__(
-                G.POWER_STR, 
-                G.POWER_FONT_SIZE, 
-                G.IMG_SIZE + G.POWER_MARGIN_LEFT, 
-                int(G.FIELD_HEIGHT/2 - G.POWER_MARGIN_TOP), 
+                G.POWER_STR,
+                G.POWER_FONT_SIZE,
+                G.IMG_SIZE + G.POWER_MARGIN_LEFT,
+                int(G.FIELD_HEIGHT/2 - G.POWER_MARGIN_TOP),
                 G.POWER_COLOR,
                 bg
                 )
- 
+
 
 class FabrickWarning(Disappearing_Label):
-    """Класс Warning надпись данной фабрики(предупреждение о нехватке очков для покупки/апгрейда"""
+    """
+    Класс Warning надпись данной фабрики
+    (предупреждение о нехватке очков для покупки/апгрейда
+    """
     def __init__(self, bg):
         """Конструктор принимает bg для отрисовки исчезающей надписи"""
         super().__init__(
-                G.DIS_STR, 
-                G.DIS_FONT_SIZE, 
+                G.DIS_STR,
+                G.DIS_FONT_SIZE,
                 int(G.FIELD_WIDTH / 2),
-                int(G.FIELD_HEIGHT / 2 - G.STANDART_DIS_PUDDING), 
+                int(G.FIELD_HEIGHT / 2 - G.STANDART_DIS_PUDDING),
                 G.DIS_COLOR,
                 G.DIS_RATE,
                 bg
-                ) 
- 
+                )
+
 
 class Field():
     """Класс Поле - тут рисуется моделька фабрики"""
     def __init__(self, screen, lvl):
         """Конструктор принимает уровень соответствующей фабрики и
         сопостовляет ей Полу по уровню"""
-        self.screen = screen 
-        self.x = G.MAIN_FIELD_MARGIN_LEFT;
-        self.y = src.Toolfunc.field_h(lvl);
+        self.screen = screen
+        self.x = G.MAIN_FIELD_MARGIN_LEFT
+        self.y = src.Toolfunc.field_h(lvl)
         self.img = pg.image.load(src.Toolfunc.img(lvl))
-        self.str_name = src.Toolfunc.name(lvl) 
-        
+        self.str_name = src.Toolfunc.name(lvl)
+
         self.bg = pg.Surface((G.FIELD_WIDTH, G.IMG_SIZE))
         self.bg.fill(G.BG_COLOR)
         self.bg_bg = pg.Surface((self.bg.get_width() - G.IMG_SIZE, G.IMG_SIZE))
         self.bg_bg.fill(G.BG_COLOR)
 
-        self.name = FabrickName(self.str_name, self.bg); 
-        self.up_cost = FabrickUpcost(self.bg); 
-        self.buy_cost = FabrickBuycost(lvl, self.bg); 
-        self.rate = FabrickRate(self.bg); 
-        self.power = FabrickPower(self.bg); 
-        self.dis_label = FabrickWarning(self.bg); 
+        self.name = FabrickName(self.str_name, self.bg)
+        self.up_cost = FabrickUpcost(self.bg)
+        self.buy_cost = FabrickBuycost(lvl, self.bg)
+        self.rate = FabrickRate(self.bg)
+        self.power = FabrickPower(self.bg)
+        self.dis_label = FabrickWarning(self.bg)
 
         self.bg.set_alpha(0)
         self.img.set_alpha(0)
@@ -122,13 +128,12 @@ class Field():
     @property
     def active(self):
         """Метод делает Поле активным"""
-        return self._active 
+        return self._active
 
     def pre_activate(self):
         """готовит поле к активации"""
         self.bg.set_alpha(G.BG_PRE_ACTIVE_ALPHA)
         self.img.set_alpha(G.BG_IMG_ACTIVE_ALPHA)
-
 
     @active.setter
     def active(self, value):
@@ -142,34 +147,37 @@ class Field():
     def set_power(self, value):
         """Метод меняет значения строки прироста на принимаемое значение"""
         self.power.rewrite(output(value) + G.POWER_STR)
-        
+
     def set_upgrade_cost(self, value):
-        """Метод меняе значение строки стоимости улучшения на принимаемое значение"""
+        """
+        Метод меняе значение строки стоимости улучшения
+        на принимаемое значение
+        """
         self.up_cost.rewrite(G.UPCOST_STR + output(value))
 
-    def Cant_buy(self):
+    def cant_buy(self):
         """Вызывает исчезающую надпись о недостаточном количестве очков"""
         self.dis_label.update()
 
     def set_rate(self, val):
         """Меняет значение надписи уровня на принимаемое значение"""
         self.rate.rewrite(output(val))
-        
-    def Tick_button(self):
+
+    def tick_button(self):
         """Метод вызывает эффект нажатия на кнопку"""
-        self.bg.set_alpha(G.TICK_ALPHA) 
+        self.bg.set_alpha(G.TICK_ALPHA)
         self.bg.fill(G.BG_COLOR)
         self.draw()
         time.sleep(G.CLICK_BUTTON_TIMERANGE)
-        self.bg.set_alpha(255) 
+        self.bg.set_alpha(255)
         self.bg.fill(G.BG_COLOR)
 
     def draw(self):
         """Метод отрисовывает данное поле"""
-        self.screen.blit(self.bg, (self.x, self.y)) 
-        self.bg.blit(self.bg_bg, (G.IMG_SIZE+G.BG_MARGIN_LEFT, 0))
+        self.screen.blit(self.bg, (self.x, self.y))
+        self.bg.blit(self.bg_bg, (G.IMG_SIZE+G.BG_MARGIN_LEFT, 0)) 
         self.bg.blit(self.img, (0, 0))
-        self.name.draw() 
+        self.name.draw()
         self.power.draw()
         if self.active:
             self.up_cost.draw()
